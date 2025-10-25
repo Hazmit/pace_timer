@@ -49,10 +49,12 @@ sudo chown -R $USER:$USER $APP_DIR
 chmod +x $APP_DIR/pace_timer.py
 chmod +x $APP_DIR/run.py
 
-# Update service file to use current user
+# Update service file to use current user and paths
 echo "Updating service file for current user ($USER)..."
 sed -i "s/User=.*/User=$USER/" $SERVICE_FILE
 sed -i "s/Group=.*/Group=$USER/" $SERVICE_FILE
+sed -i "s|WorkingDirectory=.*|WorkingDirectory=$APP_DIR|" $SERVICE_FILE
+sed -i "s|ExecStart=.*|ExecStart=/usr/bin/python3 $APP_DIR/pace_timer.py|" $SERVICE_FILE
 
 # 2. Install Python dependencies
 echo "Installing Python dependencies..."

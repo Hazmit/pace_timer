@@ -5,7 +5,7 @@ This is the refactored version of the pace_timer application with improved organ
 ## File Structure
 
 ```
-/home/jonj/pace_timer/
+pace_timer/
 ├── pace_timer.py          # Main application with Flask API and Pygame UI
 ├── run.py                 # Simple run script for the application
 ├── setup.sh               # Service installation script
@@ -53,25 +53,37 @@ This is the refactored version of the pace_timer application with improved organ
 - `POST /set_total?seconds=N` - Set total time
 - `POST /set_ends?count=N` - Set number of ends
 
+## Installation
+
+### Quick Setup
+1. **Clone or Download**: Place the pace_timer folder in your home directory
+2. **Install Dependencies**: Run the setup script to install as a system service
+3. **Access**: Open your browser to `http://localhost:5000/view`
+
+### Prerequisites
+- Python 3.6 or higher
+- pygame and flask packages (installed automatically by setup script)
+- systemd (for service installation)
+
 ## Usage
 
 ### Manual Execution
 Run the application from the project directory:
 ```bash
-cd /home/jonj/pace_timer
+cd pace_timer
 python3 pace_timer.py
 ```
 
 Or use the convenient run script:
 ```bash
-cd /home/jonj/pace_timer
+cd pace_timer
 python3 run.py
 ```
 
 ### System Service Installation
 Install as a systemd service that runs at boot:
 ```bash
-cd /home/jonj/pace_timer
+cd pace_timer
 ./setup.sh
 ```
 
