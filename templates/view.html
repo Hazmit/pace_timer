@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Pace Timer</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="top">
+    <div class="logo" id="logo"></div>
+    <div class="timer" id="timer">00:00</div>
+  </div>
+
+  <div class="row-wrap" id="rowWrap">
+    <div class="pointer" id="pointer" style="left:50%;">
+      <div class="arrow"></div>
+      <div class="label">You should be here</div>
+    </div>
+    <div class="row" id="row"></div>
+  </div>
+
+  <div class="msg"><div class="msg-inner" id="message"></div></div>
+
+  <!-- Mobile Controls -->
+  <div class="mobile-controls" id="mobileControls">
+    <button class="control-btn" id="resetBtn" onclick="resetTimer()">Reset</button>
+    <button class="control-btn" id="pauseBtn" onclick="togglePause()">Pause</button>
+    <button class="control-btn" id="resumeBtn" onclick="resumeTimer()" style="display:none;">Resume</button>
+    <button class="control-btn time-btn" onclick="subtractTime()">⏪ -1m</button>
+    <button class="control-btn time-btn" onclick="addTime()">+1m ⏩</button>
+    <a href="/configure" class="control-btn config-btn" title="Configure Settings">⚙️</a>
+  </div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

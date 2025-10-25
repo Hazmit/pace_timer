@@ -1,0 +1,24 @@
+[Unit]
+Description=Pace Timer - Raspberry Pi Timer Application
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=jonj
+Group=jonj
+WorkingDirectory=/home/jonj/pace_timer
+ExecStart=/usr/bin/python3 /home/jonj/pace_timer/pace_timer.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Environment variables (optional - can be overridden)
+Environment=PYTHONUNBUFFERED=1
+Environment=PACE_PORT=5000
+Environment=PACE_TOTAL_SECONDS=7200
+Environment=PACE_NUM_ENDS=8
+
+[Install]
+WantedBy=multi-user.target

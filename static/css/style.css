@@ -1,0 +1,482 @@
+:root {
+  --bg: #0a0c10;
+  --fg: #e6ebf0;
+  --accent: #50b4ff;
+  --fill: #46c878;
+  --panel: #14161c;
+  --button-bg: #1a1c22;
+  --button-hover: #2a2c32;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px clamp(16px, 4vw, 40px);
+  position: relative;
+}
+
+.logo img {
+  max-height: clamp(60px, 14vh, 160px);
+  height: auto;
+}
+
+.timer {
+  font-weight: 700;
+  font-size: clamp(28px, 6vh, 72px);
+  padding: 10px 16px;
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+/* Config button as part of mobile controls */
+.config-btn {
+  background: var(--button-bg);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.config-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+
+.row-wrap {
+  position: relative;
+  padding: clamp(6px, 1vh, 12px) clamp(16px, 4vw, 40px) 0;
+}
+
+.pointer {
+  position: absolute;
+  top: -60px;
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+  color: var(--fg);
+  display: block;
+}
+
+.pointer .arrow {
+  width: 0;
+  height: 0;
+  margin: 0 auto 6px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 18px solid var(--accent);
+}
+
+.pointer .label {
+  font-size: clamp(14px, 2.4vh, 26px);
+  font-weight: 600;
+  background: var(--panel);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+.row {
+  display: flex;
+  gap: clamp(6px, 1vw, 14px);
+  padding: clamp(12px, 2vh, 24px) 0 clamp(10px, 1.4vh, 16px);
+}
+
+.box {
+  flex: 1 1 0;
+  min-height: clamp(64px, 18vh, 240px);
+  border: 3px solid var(--accent);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  background: #0f1116;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(28px, 12vh, 120px);
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0%;
+  background: var(--fill);
+  border-radius: 12px;
+}
+
+.msg {
+  margin: auto 0 0 0;
+  padding: clamp(12px, 2vh, 24px) clamp(16px, 4vw, 40px);
+}
+
+.msg-inner {
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  background: var(--panel);
+  padding: clamp(12px, 1.8vh, 24px);
+  font-size: clamp(18px, 3.2vh, 32px);
+  line-height: 1.35;
+}
+
+/* Mobile Controls */
+.mobile-controls {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--panel);
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  padding: 12px;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.control-btn {
+  background: var(--button-bg);
+  color: var(--fg);
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.control-btn:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.time-btn {
+  background: var(--button-bg);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.time-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+  .mobile-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .top {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  
+  /* Hide pointer on mobile devices */
+  .pointer {
+    display: none;
+  }
+  
+  /* Position instruction text right below boxes on mobile */
+  .msg {
+    margin: 0;
+    padding: 16px clamp(16px, 4vw, 40px);
+  }
+  
+  .timer {
+    font-size: clamp(24px, 8vw, 48px);
+    padding: 8px 12px;
+  }
+  
+  .box {
+    min-height: clamp(48px, 15vh, 120px);
+    font-size: clamp(20px, 8vw, 60px);
+  }
+  
+  .pointer .label {
+    font-size: clamp(12px, 3vw, 20px);
+    padding: 3px 6px;
+  }
+  
+  .msg-inner {
+    font-size: clamp(14px, 4vw, 24px);
+    padding: clamp(8px, 2vh, 16px);
+  }
+  
+  /* Ensure mobile controls don't overlap with content */
+  body {
+    padding-bottom: 120px;
+  }
+  
+  .msg {
+    margin-bottom: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-controls {
+    bottom: 15px;
+    padding: 8px;
+    gap: 6px;
+  }
+  
+  body {
+    padding-bottom: 140px;
+  }
+  
+  .msg {
+    margin-bottom: 100px;
+  }
+  
+  .control-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    min-width: 60px;
+  }
+  
+  .time-btn {
+    font-size: 12px;
+    padding: 8px 10px;
+    min-width: 55px;
+  }
+  
+  .config-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+    min-width: 60px;
+  }
+  
+  .top {
+    padding: 12px 16px;
+  }
+  
+  .row-wrap {
+    padding: 4px 16px 20px;
+  }
+  
+  .msg {
+    padding: 8px 16px;
+  }
+}
+
+/* Configuration Page Styles */
+.config-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.config-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--accent);
+}
+
+.config-header h1 {
+  font-size: clamp(24px, 5vw, 36px);
+  margin: 0 0 15px 0;
+  color: var(--accent);
+}
+
+.back-btn {
+  display: inline-block;
+  background: var(--button-bg);
+  color: var(--fg);
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+
+.config-form {
+  background: var(--panel);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 30px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--fg);
+  font-size: 16px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  background: var(--button-bg);
+  color: var(--fg);
+  font-size: 16px;
+  box-sizing: border-box;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--fill);
+  box-shadow: 0 0 0 3px rgba(70, 200, 120, 0.2);
+}
+
+.form-group textarea {
+  min-height: 100px;
+  line-height: 1.4;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 5px;
+  color: #888;
+  font-size: 14px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.save-btn, .reset-btn {
+  flex: 1;
+  min-width: 150px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-btn {
+  background: var(--fill);
+  color: var(--bg);
+  border: 2px solid var(--fill);
+}
+
+.save-btn:hover {
+  background: var(--bg);
+  color: var(--fill);
+  transform: translateY(-2px);
+}
+
+.reset-btn {
+  background: var(--button-bg);
+  color: var(--fg);
+  border: 2px solid var(--accent);
+}
+
+.reset-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+
+.status-message {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  display: none;
+}
+
+.status-message.success {
+  background: rgba(70, 200, 120, 0.2);
+  border: 2px solid var(--fill);
+  color: var(--fill);
+  display: block;
+}
+
+.status-message.error {
+  background: rgba(255, 100, 100, 0.2);
+  border: 2px solid #ff6464;
+  color: #ff6464;
+  display: block;
+}
+
+/* Mobile responsive for config page */
+@media (max-width: 768px) {
+  .config-container {
+    padding: 15px;
+  }
+  
+  .config-form {
+    padding: 20px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .save-btn, .reset-btn {
+    min-width: auto;
+  }
+}
